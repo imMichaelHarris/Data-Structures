@@ -1,3 +1,4 @@
+from doubly_linked_list import DoublyLinkedList
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -5,6 +6,11 @@ class LRUCache:
     linked list that holds the key-value entries in the correct
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
+
+    Sounds like a queue
+    When a pair is updated or newly set the other pairs in cache is now one spot lower (array sounds good here)
+    If cache is at maximum lowest gets removed
+    If key exists overwrite 
     """
     def __init__(self, limit=10):
         pass
