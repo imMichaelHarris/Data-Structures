@@ -21,7 +21,8 @@ class LRUCache:
         # fast access sounds like array
         self.storage = {}
 
-
+    def __str__(self):
+        return f"Cache: {repr(self.storage)}"
     """
     Retrieves the value associated with the given key. Also
     needs to move the key-value pair to the end of the order
@@ -53,12 +54,16 @@ class LRUCache:
             print("overwrite")
         else:
             print("adding")
-
+            self.dll.add_to_tail(value)
+            self.storage[key] = value
 
 my_cache = LRUCache()
 print(my_cache.dll.add_to_tail(10))
 print(my_cache.dll.add_to_tail(4))
 print(my_cache.dll.add_to_tail(25))
 print(my_cache.dll.add_to_tail(14))
+my_cache.set("boo", "aaa")
+
+print(my_cache)
 
 # print(my_cache.storage)
