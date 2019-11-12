@@ -47,9 +47,14 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if self.nodes == 10:
+            print("max cahce")
+        elif hasattr(self.storage, key):
+            print("overwrite")
+        else:
+            print("adding")
 
-    
+
 my_cache = LRUCache()
 print(my_cache.dll.add_to_tail(10))
 print(my_cache.dll.add_to_tail(4))
