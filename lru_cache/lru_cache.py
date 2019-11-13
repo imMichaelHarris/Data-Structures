@@ -33,7 +33,9 @@ class LRUCache:
     def get(self, key):
         if hasattr(self.storage, key):
             # move to end of linkedlist
-            return getattr(self.storage, key)
+            node = self.storage[key]
+            self.dll.move_to_end(node)
+            return node.value
         else:
             return None
 
@@ -48,21 +50,33 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        if self.nodes == 10:
-            print("max cahce")
+        if self.nodes == 3:
+            print("max cache")
+            node = self.dll.remove_from_head()
+            [[k, v]] = node.items()
+            # print("sup", k, v)
+            self.storage.pop(k)
+            self.dll.add_to_tail({key: value})
+            self.storage[key] = value
         elif hasattr(self.storage, key):
             print("overwrite")
         else:
             print("adding")
-            self.dll.add_to_tail(value)
+            self.nodes += 1
+            self.dll.add_to_tail({key: value})
             self.storage[key] = value
 
 my_cache = LRUCache()
-print(my_cache.dll.add_to_tail(10))
-print(my_cache.dll.add_to_tail(4))
-print(my_cache.dll.add_to_tail(25))
-print(my_cache.dll.add_to_tail(14))
+# print(my_cache.dll.add_to_tail(10))
+# print(my_cache.dll.add_to_tail(4))
+# print(my_cache.dll.add_to_tail(25))
+# print(my_cache.dll.add_to_tail(14))
 my_cache.set("boo", "aaa")
+my_cache.set("another", "banana")
+my_cache.set("bob", "builder")
+
+my_cache.set("charlie", "bravo")
+
 
 print(my_cache)
 
