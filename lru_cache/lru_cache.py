@@ -60,6 +60,8 @@ class LRUCache:
             self.storage[key] = value
         elif hasattr(self.storage, key):
             print("overwrite")
+            self.storage[key] = value
+            self.dll.move_to_end({key: value})
         else:
             print("adding")
             self.nodes += 1
@@ -76,6 +78,8 @@ my_cache.set("another", "banana")
 my_cache.set("bob", "builder")
 
 my_cache.set("charlie", "bravo")
+my_cache.set("bob", "bro")
+
 
 
 print(my_cache)
