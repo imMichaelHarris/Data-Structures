@@ -10,6 +10,7 @@ class BinarySearchTree:
         self.left = None
         self.right = None
 
+  
     # Insert the given value into the tree
     def insert(self, value):
         # if value is greater than the root value start a stack to the right if less go left
@@ -17,14 +18,32 @@ class BinarySearchTree:
         # If node doesnt have a next on the side you need to traverse down then set the next to this value
         # start new tree
         new_tree = BinarySearchTree(value)
-        if current.left != None and current.right != None:
-            return
-        elif value < self.value:
-             # add to left
-             self.left = value
-        else:
-            self.right = value
-        insert()
+        # if self.left != None and self.right != None:
+        #     return
+        print("tree" ,new_tree.value)
+        if new_tree.value < self.value:
+            print("less")
+            if self.left == None:
+                self.left = new_tree
+            else:
+                self.left.insert(new_tree.value)
+        elif new_tree.value >= self.value:
+            print("greater than")
+            if self.right == None:
+                self.right = new_tree
+            else:
+                self.right.insert(new_tree.value)
+        
+
+        # elif value < self.value:
+        #      # add to left
+        #      self.left = value
+        #      insert(self.left, new_tree)
+        # else:
+        #     self.right = value
+        #     insert(self.right, new_tree)
+
+        # return 
         # if value < self.value:
         #     current = self.left
         #     while left is not None:
@@ -42,7 +61,9 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        if not self.right:
+            return self.value
+        return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
@@ -76,3 +97,12 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+myTree = BinarySearchTree(5)
+myTree.insert(2)
+myTree.insert(3)
+myTree.insert(7)
+myTree.insert(6)
+
+ 
