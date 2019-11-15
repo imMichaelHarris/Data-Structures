@@ -1,3 +1,6 @@
+from doubly_linked_list import DoublyLinkedList
+
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -5,10 +8,21 @@ class LRUCache:
     linked list that holds the key-value entries in the correct
     order, as well as a storage dict that provides fast access
     to every node stored in the cache.
+
+    Sounds like a queue
+    When a pair is updated or newly set the other pairs in cache is now one spot lower (array sounds good here)
+    If cache is at maximum lowest gets removed
+    If key exists overwrite 
     """
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.nodes = 0
+        self.dll = DoublyLinkedList()
+        # fast access sounds like array
+        self.storage = {}
 
+    def __str__(self):
+        return f"Cache: {repr(self.storage)}"
     """
     Retrieves the value associated with the given key. Also
     needs to move the key-value pair to the end of the order
@@ -17,7 +31,13 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        if hasattr(self.storage, key):
+            # move to end of linkedlist
+            node = self.storage[key]
+            self.dll.move_to_end(node)
+            return node.value
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +50,38 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if self.nodes == 3:
+            print("max cache")
+            node = self.dll.remove_from_head()
+            [[k, v]] = node.items()
+            # print("sup", k, v)
+            self.storage.pop(k)
+            self.dll.add_to_tail({key: value})
+            self.storage[key] = value
+        elif hasattr(self.storage, key):
+            print("overwrite")
+            self.storage[key] = value
+            self.dll.move_to_end({key: value})
+        else:
+            print("adding")
+            self.nodes += 1
+            self.dll.add_to_tail({key: value})
+            self.storage[key] = value
+
+my_cache = LRUCache()
+# print(my_cache.dll.add_to_tail(10))
+# print(my_cache.dll.add_to_tail(4))
+# print(my_cache.dll.add_to_tail(25))
+# print(my_cache.dll.add_to_tail(14))
+my_cache.set("boo", "aaa")
+my_cache.set("another", "banana")
+my_cache.set("bob", "builder")
+
+my_cache.set("charlie", "bravo")
+my_cache.set("bob", "bro")
+
+
+
+print(my_cache)
+
+# print(my_cache.storage)

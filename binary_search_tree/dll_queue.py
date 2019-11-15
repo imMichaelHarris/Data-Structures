@@ -18,7 +18,7 @@ class Queue:
             self.queue_list.add_to_tail(value)
 
         self.size += 1
-        return value
+        
         
 
     def dequeue(self):
@@ -30,9 +30,9 @@ class Queue:
     def len(self):
         return self.queue_list.length
 
-my_queue = Queue()
-print(my_queue.enqueue(1))
-print(my_queue.enqueue(2))
-print(my_queue.enqueue(3))
-print(my_queue.size)
-print(my_queue.dequeue())
+# my_queue = Queue()
+# print(my_queue.enqueue(1))
+# print(my_queue.enqueue(2))
+# print(my_queue.enqueue(3))
+# print(my_queue.size)
+# print(my_queue.dequeue())
