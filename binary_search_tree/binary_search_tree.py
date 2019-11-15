@@ -20,39 +20,20 @@ class BinarySearchTree:
         new_tree = BinarySearchTree(value)
         # if self.left != None and self.right != None:
         #     return
-        print("tree" ,new_tree.value)
+        # print("tree" ,new_tree.value)
         if new_tree.value < self.value:
-            print("less")
+            # print("less")
             if self.left == None:
                 self.left = new_tree
             else:
                 self.left.insert(new_tree.value)
         elif new_tree.value >= self.value:
-            print("greater than")
+            # print("greater than")
             if self.right == None:
                 self.right = new_tree
             else:
                 self.right.insert(new_tree.value)
         
-
-        # elif value < self.value:
-        #      # add to left
-        #      self.left = value
-        #      insert(self.left, new_tree)
-        # else:
-        #     self.right = value
-        #     insert(self.right, new_tree)
-
-        # return 
-        # if value < self.value:
-        #     current = self.left
-        #     while left is not None:
-        #         left 
-        #     self.left = new_tree
-        # else:
-        #     self.right = new_tree
-        # return
-            
 
     # Return True if the tree contains the value
     # False if it does not
@@ -93,12 +74,49 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+
+        # else:
+        #     if self.left:
+        #         self.left.in_order_print(self.left)
+        #     else:
+        #         self.right.in_order_print(self.right)
+        # print(self.value)
+        # print(node.value)
+
+        # if not self.left and not self.right:
+        #     print(node.value)
+        if node is None:
+            return
+        self.in_order_print(node.left)
+        # print(f"1 {node.value}")
+        print(node.value)
+        self.in_order_print(node.right)
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        #Queue place firstr node in queue
+        # enqueue the root element, then check if root element  has left if it does print and add to queue if not if not print and add right element to queue
+        # then repeat
+        tree = Queue()
+        tree.enqueue(node)
+
+        # current_node = tree.dequeue()
+        # print("my node", node.value, node.right, node.left)
+        # print("size", tree.size)
+        while tree.len() > 0:
+            current = tree.dequeue()
+            # print("the node", current.value)
+            if current.left:
+                # print("left", current.value)
+                tree.enqueue(current.left)
+            if current.right:
+                # print("right", current.value)
+                tree.enqueue(current.right)
+            print(current.value)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -117,10 +135,12 @@ class BinarySearchTree:
         pass
 
 
-myTree = BinarySearchTree(5)
-myTree.insert(2)
-myTree.insert(3)
-myTree.insert(7)
-myTree.insert(6)
+# myTree = BinarySearchTree(5)
+# myTree.insert(2)
+# myTree.insert(3)
+# myTree.insert(7)
+# myTree.insert(6)
+
+# myTree.bft_print(myTree)
 
  
